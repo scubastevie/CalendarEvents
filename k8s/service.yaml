@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: calendar-events
+spec:
+  type: LoadBalancer
+  selector:
+    app: calendar-events
+  ports:
+    - port: 80
+      targetPort: 80

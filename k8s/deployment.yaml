@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calendar-events
+  labels:
+    app: calendar-events
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: calendar-events
+  template:
+    metadata:
+      labels:
+        app: calendar-events
+    spec:
+      containers:
+        - name: calendar-events
+          image: REPLACE_WITH_ACR_LOGIN_SERVER/calendar-events:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
